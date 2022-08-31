@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,8 +21,12 @@ return new class extends Migration
             $table->softDeletes();
         });
 
+        Role::create(['id' => 1,'name' => 'блогер']);
+        Role::create(['id' => 2,'name' => 'заказчик']);
+        Role::create(['id' => 3,'name' => 'админ']);
+
         Schema::table('users',function (Blueprint $table){
-            $table->foreignId('role_id')->after('balance')->constrained('roles')->cascadeOnDelete();
+            $table->foreignId('role_id')->default(1)->after('balance')->constrained('roles')->cascadeOnDelete();
         });
     }
 

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->comment("заказчик")->constrained('users')->cascadeOnDelete();
-            $table->foreignId('status_id')->constrained('statuses')->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('status_id')->default(1)->constrained('statuses')->cascadeOnDelete();
+            $table->foreignId('category_id')->default(1)->constrained('categories')->cascadeOnDelete();
             $table->integer('count')->default(0)->comment('Сколько view нужно');
             $table->float('price')->default(1)->comment('цена за 1 view');
             $table->string('link')->comment('ссылка от заказчика');

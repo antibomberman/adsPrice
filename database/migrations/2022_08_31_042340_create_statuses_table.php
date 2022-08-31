@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,13 +16,15 @@ return new class extends Migration
     {
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
-            $table->string('description');
+            $table->string('key')->unique();
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
+        Status::create(['key' => 'init']);
+
         Schema::table('users',function (Blueprint $table){
-            $table->foreignId('status_id')->after('balance')->constrained('statuses')->cascadeOnDelete();
+            $table->foreignId('status_id')->default(1)->after('balance')->constrained('statuses')->cascadeOnDelete();
         });
     }
 

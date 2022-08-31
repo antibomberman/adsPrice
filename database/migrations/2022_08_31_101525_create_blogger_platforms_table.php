@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('platform_id')->constrained('platforms')->cascadeOnDelete();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('status_id')->constrained('statuses')->cascadeOnDelete();
+            $table->foreignId('status_id')->default(1)->constrained('statuses')->cascadeOnDelete();
             $table->string('link');
 
             $table->timestamps();
