@@ -13,16 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique();
-            $table->string('password');
-            $table->string('avatar')->nullable();
-            $table->float('balance')->default(0);
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->string('key');
+            $table->string('description');
             $table->timestamps();
+            $table->softDeletes();
+        });
+        Schema::table('users',function (Blueprint $table){
+            $table->foreignId('status_id')->after('balance')->constrained('statuses')->cascadeOnDelete();
         });
     }
 
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('statuses');
     }
 };

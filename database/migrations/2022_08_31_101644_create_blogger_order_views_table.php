@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('blogger_order_views', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique();
-            $table->string('password');
-            $table->string('avatar')->nullable();
-            $table->float('balance')->default(0);
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->foreignId('blogger_order_id')->constrained('blogger_orders')->cascadeOnDelete();
+            $table->ipAddress('ip');
+            $table->string('agent');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('blogger_order_views');
     }
 };

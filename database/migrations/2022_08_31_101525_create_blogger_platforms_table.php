@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('blogger_platforms', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone')->unique();
-            $table->string('password');
-            $table->string('avatar')->nullable();
-            $table->float('balance')->default(0);
-            $table->rememberToken();
-            $table->softDeletes();
+            $table->foreignId('platform_id')->constrained('platforms')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('status_id')->constrained('statuses')->cascadeOnDelete();
+            $table->string('link');
+
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('blogger_platforms');
     }
 };
