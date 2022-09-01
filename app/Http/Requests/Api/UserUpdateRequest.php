@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AuthRegisterRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class AuthRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'name' => '',
-            'role_id' => 'exists:roles,id',
-            'phone' => 'unique:users|required',
-            'password' => 'required|confirmed',
+            'phone' => '',
+            'name' => ''
         ];
     }
 
