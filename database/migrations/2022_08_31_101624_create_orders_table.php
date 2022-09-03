@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('count')->default(0)->comment('Сколько view нужно');
             $table->float('price')->default(1)->comment('цена за 1 view');
             $table->string('link')->comment('ссылка от заказчика');
+            $table->string('video')->nullable()->comment('video path');
             $table->longText('description')->nullable();
             $table->timestamps();
         });
