@@ -34,6 +34,10 @@ use phpDocumentor\Reflection\Types\Collection;
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withoutTrashed()
  * @mixin \Eloquent
+ * @property int $count
+ * @property string|null $url
+ * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereUrl($value)
  */
 class BloggerOrder extends Model
 {

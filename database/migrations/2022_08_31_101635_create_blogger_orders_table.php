@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->comment("блогер")->constrained('users')->cascadeOnDelete();
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->string('token')->unique();
+            $table->integer('count')->default(0);
+            $table->string('url')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

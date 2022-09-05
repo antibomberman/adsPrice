@@ -1,7 +1,7 @@
 version: "3.6"
 
 networks:
-    project_network:
+    laravel:
         driver: bridge
 services:
   nginx:
@@ -14,14 +14,14 @@ services:
     ports:
         - "8880:80"
     depends_on:
-      - app
-    container_name: project_nginx
+      - php
+    container_name: nginx
     networks:
-        - project_network
-  app:
+        - laravel
+  php:
     build:
       context: .
-      dockerfile: _docker/app/Dockerfile
+      dockerfile: ./_docker/php/Dockerfile
     restart: unless-stopped
     tty: true
     volumes:
@@ -29,9 +29,9 @@ services:
     depends_on:
       - mysql
       - redis
-    container_name: project_app
+    container_name: php
     networks:
-        - project_network
+        - laravel
 
   mysql:
     image: mysql:8.0
@@ -50,16 +50,72 @@ services:
     volumes:
 #      - ./init:/docker-entrypoint-initdb.d
       - ./tmp/db:/var/lib/mysql
-    container_name: project_mysql
+    container_name: mysql
     networks:
-        - project_network
+        - laravel
 
   redis:
       image: redis:7.0
-      container_name: project_redis
+      container_name: redis
       volumes:
           - ./tmp/redis:/data
       ports:
           - "8802:6379"
       networks:
-          - project_network
+          - laravel
+  composer:
+      build:
+          context: .
+          dockerfile: ./_docker/composer/Dockerfile
+          args:
+              - UID=${UID:-1000}
+              - GID=${GID:-1000}
+      container_name: composer
+      volumes:
+          - ./:/var/www/backend
+      working_dir: /var/www/backend
+      depends_on:
+          - php
+      user: laravel
+      entrypoint: [ 'composer']
+      networks:
+          - laravel
+  artisan:
+      build:
+          context: .
+          dockerfile: ./_docker/php/Dockerfile
+          args:
+              - UID=${UID:-1000}
+              - GID=${GID:-1000}
+      container_name: artisan
+      volumes:
+          - ./:/var/www/backend:delegated
+      depends_on:
+          - mysql
+      working_dir: /var/www/backend
+      entrypoint: [ 'php', '/var/www/backend/artisan' ]
+      networks:
+          - laravel
+
+
+
+#  mailhog:
+#      image: mailhog/mailhog:latest
+#      container_name: mailhog
+#      ports:
+#          - 1025:1025
+#          - 8025:8025
+#      networks:
+#          - laravel
+
+  npm:
+      image: node:18
+      container_name: npm
+      volumes:
+          - ./:/var/www/backend
+      ports:
+          - "3000:3000"
+      working_dir: /var/www/backend
+      entrypoint: ['npm']
+      networks:
+          - laravel

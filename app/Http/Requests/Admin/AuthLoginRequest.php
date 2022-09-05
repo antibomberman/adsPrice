@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderHistoryRequest extends FormRequest
+class AuthLoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,15 @@ class OrderHistoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'page' => 'required|integer',
+            'phone' => ['required','exists:users'],
+            'password' => ['required','max:255']
         ];
     }
 
     public function messages()
     {
         return [
+            'phone.exists' => 'неверный телефон номер',
         ];
     }
 

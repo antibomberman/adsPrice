@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
+use OwenIt\Auditing\Contracts\Auditable;
 
 /**
  * App\Models\User
@@ -65,10 +66,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
+ * @property-read int|null $audits_count
  */
-class User extends Authenticatable
+class User extends Authenticatable  implements Auditable
 {
-    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable,SoftDeletes,\OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'name',
@@ -87,6 +90,22 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    function isAdmin(): bool
+    {
+        return $this->role_id == 3;
+    }
+    function isModerator(): bool
+    {
+        return $this->role_id == 4;
+    }
+    function isCustomer(): bool
+    {
+        return $this->role_id == 1;
+    }
+    function isBlogger(): bool
+    {
+        return $this->role_id == 1;
+    }
     function category(): BelongsTo
     {
         return  $this->belongsTo(Category::class);

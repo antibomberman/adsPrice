@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\OrderHistoryRequest;
-use App\Http\Requests\Api\OrderIndexRequest;
-use App\Http\Resources\BloggerOrderResource;
+use App\Http\Requests\Admin\OrderIndexRequest;
 use App\Http\Resources\OrderResource;
-use App\Models\BloggerOrder;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -32,21 +29,5 @@ class OrderController extends Controller
         return response()->json(new OrderResource( $order));
     }
 
-    function history(OrderHistoryRequest $request)
-    {
-        $orders = Auth::user()->orders()->paginate(25);
-
-        return response()->json(OrderResource::collection($orders));
-    }
-    function bloggerOrders(OrderHistoryRequest $request)
-    {
-        $orders = Auth::user()->bloggerOrders()->with('order')->paginate(25);
-
-        return response()->json(BloggerOrderResource::collection($orders));
-    }
-    function join(Order $order)
-    {
-
-    }
 
 }

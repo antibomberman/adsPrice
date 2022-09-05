@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderHistoryRequest extends FormRequest
+class OrderIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,6 +26,7 @@ class OrderHistoryRequest extends FormRequest
     {
         return [
             'page' => 'required|integer',
+            'category_id' => 'exists:categories,id',
         ];
     }
 

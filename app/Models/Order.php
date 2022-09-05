@@ -41,6 +41,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|Order withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Order withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $video video path
+ * @property string|null $description
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideo($value)
  */
 class Order extends Model
 {
