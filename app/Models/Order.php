@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\Order
  *
  * @property int $id
  * @property int $user_id заказчик
- * @property int $status_id
  * @property int $category_id
  * @property int $count Сколько view нужно
  * @property float $price цена за 1 view
@@ -23,7 +25,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BloggerOrder[] $bloggerOrders
  * @property-read int|null $blogger_orders_count
  * @property-read \App\Models\Category $category
- * @property-read \App\Models\Status $status
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
@@ -45,21 +46,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $description
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideo($value)
+ * @property int $status
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereStatus($value)
  */
 class Order extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','status_id','category_id','count','price','link'];
+    protected $fillable = ['user_id','status_id','category_id','count','price','link','video','description'];
     protected $hidden = ['updated_at','deleted_at'];
 
     function user():BelongsTo
     {
         return  $this->belongsTo(User::class);
     }
-    function status():BelongsTo
-    {
-        return  $this->belongsTo(Status::class);
-    }
+
     function category():BelongsTo
     {
         return  $this->belongsTo(Category::class);
@@ -67,5 +67,13 @@ class Order extends Model
     function bloggerOrders(): HasMany
     {
         return  $this->hasMany(BloggerOrder::class);
+    }
+
+    protected function video(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
+            set: fn ($value) => Storage::disk('public')->putFile("videos/".Carbon::now()->format('Y/m'),$value),
+        );
     }
 }

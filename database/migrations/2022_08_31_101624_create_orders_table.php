@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('video')->nullable()->comment('video path');
             $table->longText('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

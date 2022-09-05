@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderIndexRequest extends FormRequest
+class BloggerPlatformUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,8 @@ class OrderIndexRequest extends FormRequest
     public function rules()
     {
         return [
-//            'page' => 'required|integer',
-            'category_id' => 'exists:categories,id',
+            'platform_id' => 'exists:platforms,id',
+            'link' => 'url'
         ];
     }
 

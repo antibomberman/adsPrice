@@ -68,6 +68,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
  * @property-read int|null $audits_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  */
 class User extends Authenticatable  implements Auditable
 {
@@ -81,7 +82,7 @@ class User extends Authenticatable  implements Auditable
         'balance',
         'category_id',
         'role_id',
-        'status_id',
+        'status',
     ];
 
 
@@ -109,10 +110,6 @@ class User extends Authenticatable  implements Auditable
     function category(): BelongsTo
     {
         return  $this->belongsTo(Category::class);
-    }
-    function status(): BelongsTo
-    {
-        return  $this->belongsTo(Status::class);
     }
     function role(): BelongsTo
     {

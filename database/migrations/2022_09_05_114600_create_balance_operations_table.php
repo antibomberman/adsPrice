@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blogger_order_views', function (Blueprint $table) {
+        Schema::create('balance_operations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('blogger_order_id')->constrained('blogger_orders')->cascadeOnDelete();
-            $table->ipAddress('ip');
-            $table->integer('open_count')->default(0);
-            $table->string('agent');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->float('value');
+            $table->float('balance');
+            $table->enum('operation',['plus',',minus']);
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogger_order_views');
+        Schema::dropIfExists('balance_operations');
     }
 };

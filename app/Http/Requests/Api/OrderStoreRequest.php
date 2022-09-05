@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderIndexRequest extends FormRequest
+class OrderStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,12 @@ class OrderIndexRequest extends FormRequest
     public function rules()
     {
         return [
-//            'page' => 'required|integer',
-            'category_id' => 'exists:categories,id',
+            'category_id' => 'required|exists:categories,id',
+            'count' => 'integer',
+            'price' => 'integer',
+            'link' => 'required|url',
+            'video' => 'file',
+            'description' => 'string'
         ];
     }
 

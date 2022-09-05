@@ -64,7 +64,6 @@ class AuthController extends Controller
         ]);
     }
 
-
     public function logout():JsonResponse
     {
         Auth::user()->tokens()->delete();

@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView whereIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $open_count
+ * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView whereOpenCount($value)
  */
 class BloggerOrderView extends Model
 {

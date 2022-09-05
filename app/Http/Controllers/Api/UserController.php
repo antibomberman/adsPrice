@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
 
-    public function profile()
+    public function profile(Request $request)
     {
         return response()->json(new UserResource(Auth::user()));
     }

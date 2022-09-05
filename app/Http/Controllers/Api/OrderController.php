@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\OrderHistoryRequest;
 use App\Http\Requests\Api\OrderIndexRequest;
+use App\Http\Requests\Api\OrderStoreRequest;
+use App\Http\Requests\Api\OrderUpdateRequest;
 use App\Http\Resources\BloggerOrderResource;
 use App\Http\Resources\OrderResource;
 use App\Models\BloggerOrder;
@@ -31,22 +33,25 @@ class OrderController extends Controller
     {
         return response()->json(new OrderResource( $order));
     }
-
+    function store(OrderStoreRequest $request)
+    {
+        $order =Auth::user()->orders()->create($request->validated());
+        return response()->json(new OrderResource( $order));
+    }
+    function delete(Order $order)
+    {
+        $order->delete();
+        return response()->json(['message' => 'удалено']);
+    }
+    function update(OrderUpdateRequest $request,Order $order)
+    {
+        $order->update($request->validated());
+        return response()->json(new OrderResource( $order));
+    }
     function history(OrderHistoryRequest $request)
     {
         $orders = Auth::user()->orders()->paginate(25);
 
         return response()->json(OrderResource::collection($orders));
     }
-    function bloggerOrders(OrderHistoryRequest $request)
-    {
-        $orders = Auth::user()->bloggerOrders()->with('order')->paginate(25);
-
-        return response()->json(BloggerOrderResource::collection($orders));
-    }
-    function join(Order $order)
-    {
-
-    }
-
 }

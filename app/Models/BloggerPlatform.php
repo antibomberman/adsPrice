@@ -34,11 +34,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|BloggerPlatform withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BloggerPlatform withoutTrashed()
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|BloggerPlatform whereStatus($value)
  */
 class BloggerPlatform extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['platform_id','user_id','status_id','link'];
+    protected $fillable = ['platform_id','user_id','status','link'];
 
     protected $hidden = ['created_at','updated_at','deleted_at'];
 
@@ -50,8 +51,5 @@ class BloggerPlatform extends Model
     {
         return  $this->belongsTo(User::class);
     }
-    function status(): BelongsTo
-    {
-        return  $this->belongsTo(Status::class);
-    }
+
 }

@@ -26,7 +26,9 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'phone' => '',
-            'name' => ''
+            'name' => '',
+            'avatar' => 'image',
+            'category_id' => 'exists:categories,id'
         ];
     }
 

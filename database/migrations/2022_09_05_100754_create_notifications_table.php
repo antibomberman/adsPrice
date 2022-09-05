@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blogger_platforms', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('platform_id')->constrained('platforms')->cascadeOnDelete();
+            $table->tinyInteger('type')->default(1);
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->integer('status')->default(1);
-            $table->string('link');
-
+            $table->foreignId('other_user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('order_id')->nullable()->constrained('orders')->cascadeOnDelete();
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blogger_platforms');
+        Schema::dropIfExists('notifications');
     }
 };

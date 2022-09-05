@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use phpDocumentor\Reflection\Types\Collection;
 
@@ -38,11 +40,13 @@ use phpDocumentor\Reflection\Types\Collection;
  * @property string|null $url
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereUrl($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BloggerOrderView[] $bloggerOrderView
+ * @property-read int|null $blogger_order_view_count
  */
 class BloggerOrder extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','order_id','token'];
+    protected $fillable = ['user_id','order_id','token','url'];
     protected $hidden = ['updated_at','deleted_at'];
 
     function order(): BelongsTo
@@ -53,4 +57,16 @@ class BloggerOrder extends Model
     {
         return  $this->belongsTo(User::class);
     }
+    function bloggerOrderView():HasMany
+    {
+        return  $this->hasMany(BloggerOrderView::class);
+    }
+
+    protected function token(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => route('referral',$value),
+        );
+    }
+
 }
