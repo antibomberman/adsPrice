@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('avatar')->nullable();
             $table->float('balance')->default(0);
+            $table->integer('status')->default(1);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

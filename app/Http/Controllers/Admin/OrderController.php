@@ -20,6 +20,9 @@ class OrderController extends Controller
         ->when($request->has('category_id'),function ($q){
             return $q->where('category_id',\request('category_id'));
         })
+        ->when($request->has('status_id'),function ($q){
+            return $q->where('status_id',\request('status_id'));
+        })
         ->paginate(25);
 
         return response()->json(OrderResource::collection($orders));
@@ -27,6 +30,16 @@ class OrderController extends Controller
     function show(Order $order)
     {
         return response()->json(new OrderResource( $order));
+    }
+    function update()
+    {
+
+    }
+    function delete(Order $order)
+    {
+        $order->delete();
+
+        return response()->json(['message' => 'Удалено']);
     }
 
 
