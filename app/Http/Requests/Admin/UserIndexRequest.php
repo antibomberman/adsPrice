@@ -25,6 +25,10 @@ class UserIndexRequest extends FormRequest
     public function rules()
     {
         return [
+            'category_id' => 'exists:categories,id',
+            'search' => '',
+            'role_id' => 'exists:roles,id'
+
         ];
     }
 

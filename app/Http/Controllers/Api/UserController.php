@@ -8,6 +8,8 @@ use App\Http\Requests\Api\AuthRegisterRequest;
 use App\Http\Requests\Api\AuthRegisterVerifyRequest;
 use App\Http\Requests\Api\UserUpdateRequest;
 use App\Http\Resources\UserResource;
+use App\Models\Category;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,6 +29,21 @@ class UserController extends Controller
         Auth::user()->update($request->validated());
 
         return response()->json(new UserResource(Auth::user()));
+    }
+
+    function category()
+    {
+        return response()->json(Category::orderBy('name')->get());
+    }
+    function setting()
+    {
+        return response()->json(Setting::firstOrFail());
+    }
+    function notification()
+    {
+        $notifications = Auth::user()->notifications()->latest()->get();
+
+        return response()->json($notifications);
     }
 
 }

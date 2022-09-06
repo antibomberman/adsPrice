@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrderIndexRequest;
+use App\Http\Requests\Admin\OrderUpdateRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
@@ -31,9 +32,11 @@ class OrderController extends Controller
     {
         return response()->json(new OrderResource( $order));
     }
-    function update()
+    function update(OrderUpdateRequest $request,Order $order)
     {
+        $order->update($request->validated());
 
+        return response()->json(new OrderResource($order));
     }
     function delete(Order $order)
     {

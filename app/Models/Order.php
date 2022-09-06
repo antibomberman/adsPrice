@@ -48,6 +48,8 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideo($value)
  * @property int $status
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereStatus($value)
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDeletedAt($value)
  */
 class Order extends Model
 {

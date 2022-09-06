@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class OrderUpdateRequest extends FormRequest
+class BalanceOperationIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,8 @@ class OrderUpdateRequest extends FormRequest
     {
         return [
             'category_id' => 'exists:categories,id',
-            'status' => '',
-            'count' => '',
-            'price' => '',
-            'link' => 'url',
-            'video' => '',
-            'description' => '',
+            'search' => '',
+            'role_id' => 'exists:roles,id',
         ];
     }
 

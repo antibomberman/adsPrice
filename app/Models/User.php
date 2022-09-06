@@ -129,7 +129,10 @@ class User extends Authenticatable  implements Auditable
         return  $this->hasMany(BloggerPlatform::class);
     }
 
-
+    function notifications():HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
     protected function password(): Attribute
     {
         return Attribute::make(

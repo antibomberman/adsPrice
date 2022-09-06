@@ -28,6 +28,8 @@ Route::post('register',[AuthController::class,'register']);
 Route::post('register/verify',[AuthController::class,'registerVerify']);
 Route::post('login',[AuthController::class,'login']);
 
+Route::get('category',[UserController::class,'category']);
+Route::get('setting',[UserController::class,'setting']);
 Route::get('platform',[PlatformController::class,'index']);
 Route::get('referral/{token}',[BloggerOrderController::class,'referral'])->name('referral');
 
@@ -35,6 +37,7 @@ Route::get('referral/{token}',[BloggerOrderController::class,'referral'])->name(
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('notification', [UserController::class, 'notification']);
     Route::get('profile', [UserController::class, 'profile']);
     Route::post('update', [UserController::class, 'update']);
 
