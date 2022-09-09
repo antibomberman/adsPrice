@@ -29,7 +29,7 @@ class CronTest extends Command
      */
     public function handle()
     {
-        Log::info(Carbon::now() . ' - carbon hello cron');
+        Log::info(Carbon::now().' - carbon hello cron');
 
         return 0;
     }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('blogger_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->comment("блогер")->constrained('users')->cascadeOnDelete();
+            $table->foreignId('user_id')->comment('блогер')->constrained('users')->cascadeOnDelete();
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->string('token')->unique();
             $table->integer('count')->default(0);

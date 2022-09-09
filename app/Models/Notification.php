@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Notification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Notification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Notification query()
@@ -35,5 +36,5 @@ class Notification extends Model
 {
     use HasFactory;
 
-    protected $fillable  = ['user_id','other_user_id','order_id','description','type','title'];
+    protected $fillable = ['user_id', 'other_user_id', 'order_id', 'description', 'type', 'title'];
 }

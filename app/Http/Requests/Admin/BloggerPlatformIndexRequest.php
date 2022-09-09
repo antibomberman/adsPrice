@@ -28,7 +28,7 @@ class BloggerPlatformIndexRequest extends FormRequest
             'page' => 'required|integer',
             'user_id' => 'exists:users,id',
             'platform_id' => 'exists:platforms,id',
-            'status' => ''
+            'status' => '',
         ];
     }
 
@@ -38,10 +38,10 @@ class BloggerPlatformIndexRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

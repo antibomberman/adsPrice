@@ -21,12 +21,12 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Role::create(['id' => 1,'name' => 'блогер']);
-        Role::create(['id' => 2,'name' => 'заказчик']);
-        Role::create(['id' => 3,'name' => 'админ']);
-        Role::create(['id' => 4,'name' => 'модератор']);
+        Role::create(['id' => 1, 'name' => 'блогер']);
+        Role::create(['id' => 2, 'name' => 'заказчик']);
+        Role::create(['id' => 3, 'name' => 'админ']);
+        Role::create(['id' => 4, 'name' => 'модератор']);
 
-        Schema::table('users',function (Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->foreignId('role_id')->default(1)->after('balance')->constrained('roles')->cascadeOnDelete();
         });
     }

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $help Помощь
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
@@ -33,5 +34,5 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['balance_phone','user_agreement','offer','help','privacy_policy'];
+    protected $fillable = ['balance_phone', 'user_agreement', 'offer', 'help', 'privacy_policy'];
 }

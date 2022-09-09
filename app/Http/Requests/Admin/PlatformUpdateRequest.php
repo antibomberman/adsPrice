@@ -26,7 +26,7 @@ class PlatformUpdateRequest extends FormRequest
     {
         return [
             'name' => '',
-            'icon' => 'image'
+            'icon' => 'image',
         ];
     }
 
@@ -36,10 +36,10 @@ class PlatformUpdateRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

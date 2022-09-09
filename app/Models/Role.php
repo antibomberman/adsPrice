@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Role newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Role newQuery()
  * @method static \Illuminate\Database\Query\Builder|Role onlyTrashed()
@@ -31,6 +32,7 @@ class Role extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['id','name'];
-    protected $hidden = ['created_at','updated_at','deleted_at'];
+    protected $fillable = ['id', 'name'];
+
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 }

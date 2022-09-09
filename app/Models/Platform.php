@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Platform newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Platform newQuery()
  * @method static \Illuminate\Database\Query\Builder|Platform onlyTrashed()
@@ -35,16 +36,16 @@ use Illuminate\Support\Facades\Storage;
 class Platform extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['name','icon'];
 
-    protected $hidden = ['created_at','deleted_at','updated_at'];
+    protected $fillable = ['name', 'icon'];
 
+    protected $hidden = ['created_at', 'deleted_at', 'updated_at'];
 
     protected function icon(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
-            set: fn ($value) => Storage::disk('public')->putFile("images/".Carbon::now()->format('Y/m'),$value),
+            set: fn ($value) => Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $value),
         );
     }
 }

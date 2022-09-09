@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Storage;
  * @property-read int|null $blogger_orders_count
  * @property-read \App\Models\Category $category
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Query\Builder|Order onlyTrashed()
@@ -42,31 +43,40 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Query\Builder|Order withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Order withoutTrashed()
  * @mixin \Eloquent
+ *
  * @property string|null $video video path
  * @property string|null $description
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideo($value)
+ *
  * @property int $status
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereStatus($value)
+ *
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDeletedAt($value)
  */
 class Order extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','status_id','category_id','count','price','name','link','video','description'];
-    protected $hidden = ['updated_at','deleted_at'];
 
-    function user():BelongsTo
+    protected $fillable = ['user_id', 'status_id', 'category_id', 'count', 'price', 'name', 'link', 'video', 'description'];
+
+    protected $hidden = ['updated_at', 'deleted_at'];
+
+    public function user(): BelongsTo
     {
         return  $this->belongsTo(User::class);
     }
 
-    function category():BelongsTo
+    public function category(): BelongsTo
     {
         return  $this->belongsTo(Category::class);
     }
-    function bloggerOrders(): HasMany
+
+    public function bloggerOrders(): HasMany
     {
         return  $this->hasMany(BloggerOrder::class);
     }
@@ -75,13 +85,14 @@ class Order extends Model
     {
         return Attribute::make(
             get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
-            set: fn ($value) => Storage::disk('public')->putFile("videos/".Carbon::now()->format('Y/m'),$value),
+            set: fn ($value) => Storage::disk('public')->putFile('videos/'.Carbon::now()->format('Y/m'), $value),
         );
     }
-    function getViewCount():int
+
+    public function getViewCount(): int
     {
-        return BloggerOrder::join('blogger_order_views','blogger_order_views.blogger_order_id','blogger_orders.id')
-            ->where('order_id',$this->id)
+        return BloggerOrder::join('blogger_order_views', 'blogger_order_views.blogger_order_id', 'blogger_orders.id')
+            ->where('order_id', $this->id)
             ->count();
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $deleted_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Category newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Category query()
@@ -28,5 +29,6 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
-    protected $hidden = ['created_at','updated_at','deleted_at'];
+
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 }

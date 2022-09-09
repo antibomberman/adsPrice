@@ -21,7 +21,7 @@ class BloggerOrderResource extends JsonResource
             'url' => $this->url,
             'referral_link' => $this->token,
             'created_at' => $this->created_at,
-            'view_count' => $this->bloggerOrderView()->count()
+            'view_count' => $this->bloggerOrderView()->count(),
         ];
     }
 }

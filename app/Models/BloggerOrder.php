@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use phpDocumentor\Reflection\Types\Collection;
 
 /**
  * App\Models\BloggerOrder
@@ -22,6 +21,7 @@ use phpDocumentor\Reflection\Types\Collection;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Order $order
  * @property-read \App\Models\User $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder newQuery()
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder onlyTrashed()
@@ -36,28 +36,35 @@ use phpDocumentor\Reflection\Types\Collection;
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withoutTrashed()
  * @mixin \Eloquent
+ *
  * @property int $count
  * @property string|null $url
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereUrl($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BloggerOrderView[] $bloggerOrderView
  * @property-read int|null $blogger_order_view_count
  */
 class BloggerOrder extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','order_id','token','url'];
-    protected $hidden = ['updated_at','deleted_at'];
 
-    function order(): BelongsTo
+    protected $fillable = ['user_id', 'order_id', 'token', 'url'];
+
+    protected $hidden = ['updated_at', 'deleted_at'];
+
+    public function order(): BelongsTo
     {
         return  $this->belongsTo(Order::class);
     }
-    function user(): BelongsTo
+
+    public function user(): BelongsTo
     {
         return  $this->belongsTo(User::class);
     }
-    function bloggerOrderView():HasMany
+
+    public function bloggerOrderView(): HasMany
     {
         return  $this->hasMany(BloggerOrderView::class);
     }
@@ -65,8 +72,7 @@ class BloggerOrder extends Model
     protected function token(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => route('referral',$value),
+            get: fn ($value) => route('referral', $value),
         );
     }
-
 }

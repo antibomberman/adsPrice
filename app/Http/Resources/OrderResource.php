@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\BloggerOrder;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource

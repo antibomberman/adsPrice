@@ -25,7 +25,7 @@ class OrderIndexRequest extends FormRequest
     public function rules()
     {
         return [
-//            'page' => 'required|integer',
+            //            'page' => 'required|integer',
             'category_id' => 'exists:categories,id',
         ];
     }
@@ -36,10 +36,10 @@ class OrderIndexRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

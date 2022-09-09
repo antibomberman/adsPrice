@@ -28,7 +28,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => '',
             'name' => '',
             'avatar' => 'image',
-            'category_id' => 'exists:categories,id'
+            'category_id' => 'exists:categories,id',
         ];
     }
 
@@ -38,10 +38,10 @@ class UserUpdateRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

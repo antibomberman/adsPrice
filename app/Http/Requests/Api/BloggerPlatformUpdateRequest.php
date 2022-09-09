@@ -26,7 +26,7 @@ class BloggerPlatformUpdateRequest extends FormRequest
     {
         return [
             'platform_id' => 'exists:platforms,id',
-            'link' => 'url'
+            'link' => 'url',
         ];
     }
 
@@ -36,10 +36,10 @@ class BloggerPlatformUpdateRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

@@ -2,10 +2,8 @@
 
 namespace App\Console;
 
-use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,10 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('cron:test')->everyMinute();
-
-
-
+        $schedule->command('cron:test')->everyMinute();
     }
 
     /**

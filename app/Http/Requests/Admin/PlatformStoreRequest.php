@@ -26,7 +26,7 @@ class PlatformStoreRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'icon' => 'required|image'
+            'icon' => 'required|image',
         ];
     }
 
@@ -36,10 +36,10 @@ class PlatformStoreRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

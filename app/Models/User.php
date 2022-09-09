@@ -45,6 +45,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property-read \App\Models\Status $status
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
+ *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -66,11 +67,13 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
  * @property-read int|null $audits_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  */
-class User extends Authenticatable  implements Auditable
+class User extends Authenticatable implements Auditable
 {
     use HasApiTokens, HasFactory, Notifiable,SoftDeletes,\OwenIt\Auditing\Auditable;
 
@@ -85,7 +88,6 @@ class User extends Authenticatable  implements Auditable
         'status',
     ];
 
-
     protected $hidden = [
         'password',
         'deleted_at',
@@ -94,61 +96,68 @@ class User extends Authenticatable  implements Auditable
         'remember_token',
     ];
 
-    function isAdmin(): bool
+    public function isAdmin(): bool
     {
         return $this->role_id == 3;
     }
-    function isModerator(): bool
+
+    public function isModerator(): bool
     {
         return $this->role_id == 4;
     }
-    function isCustomer(): bool
+
+    public function isCustomer(): bool
     {
         return $this->role_id == 1;
     }
-    function isBlogger(): bool
+
+    public function isBlogger(): bool
     {
         return $this->role_id == 1;
     }
-    function category(): BelongsTo
+
+    public function category(): BelongsTo
     {
         return  $this->belongsTo(Category::class);
     }
-    function role(): BelongsTo
+
+    public function role(): BelongsTo
     {
         return  $this->belongsTo(Role::class);
     }
-    function orders(): HasMany
+
+    public function orders(): HasMany
     {
         return  $this->hasMany(Order::class);
     }
 
-    function bloggerOrders(): HasMany
+    public function bloggerOrders(): HasMany
     {
         return  $this->hasMany(BloggerOrder::class);
     }
-    function bloggerPlatforms(): HasMany
+
+    public function bloggerPlatforms(): HasMany
     {
         return  $this->hasMany(BloggerPlatform::class);
     }
 
-    function notifications():HasMany
+    public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
     }
+
     protected function password(): Attribute
     {
         return Attribute::make(
             set: fn ($value) => Hash::make($value),
         );
     }
+
     protected function avatar(): Attribute
     {
         return Attribute::make(
             get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
-            set: fn ($value) => Storage::disk('public')->putFile("images/".Carbon::now()->format('Y/m'),$value),
+            set: fn ($value) => Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $value),
         );
     }
-
-
 }

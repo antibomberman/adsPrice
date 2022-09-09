@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->float('value');
             $table->float('balance');
-            $table->enum('operation',['plus','minus']);
+            $table->enum('operation', ['plus', 'minus']);
             $table->timestamps();
         });
     }
