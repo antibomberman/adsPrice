@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Storage;
 class Order extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','status_id','category_id','count','price','link','video','description'];
+    protected $fillable = ['user_id','status_id','category_id','count','price','name','link','video','description'];
     protected $hidden = ['updated_at','deleted_at'];
 
     function user():BelongsTo
@@ -77,5 +77,11 @@ class Order extends Model
             get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
             set: fn ($value) => Storage::disk('public')->putFile("videos/".Carbon::now()->format('Y/m'),$value),
         );
+    }
+    function getViewCount():int
+    {
+        return BloggerOrder::join('blogger_order_views','blogger_order_views.blogger_order_id','blogger_orders.id')
+            ->where('order_id',$this->id)
+            ->count();
     }
 }

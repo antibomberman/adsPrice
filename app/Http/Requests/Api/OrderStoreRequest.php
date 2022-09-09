@@ -27,6 +27,7 @@ class OrderStoreRequest extends FormRequest
         return [
             'category_id' => 'required|exists:categories,id',
             'count' => 'integer',
+            'name' => 'required',
             'price' => 'integer',
             'link' => 'required|url',
             'video' => 'file',

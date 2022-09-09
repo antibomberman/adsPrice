@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserIndexRequest;
+use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -33,11 +34,17 @@ class UserController extends Controller
 
         return response()->json(UserResource::collection($users));
     }
-    public function update(UserUpdateRequest $request)
+    public function store(UserStoreRequest $request)
     {
-        Auth::user()->update($request->validated());
+       $user = User::create($request->validated());
 
-        return response()->json(new UserResource(Auth::user()));
+        return response()->json(new UserResource($user));
+    }
+    public function update(UserUpdateRequest $request,User $user)
+    {
+        $user->update($request->validated());
+
+        return response()->json(new UserResource($user));
     }
     public function show(User $user)
     {

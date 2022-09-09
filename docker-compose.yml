@@ -60,7 +60,7 @@ services:
       volumes:
           - ./tmp/redis:/data
       ports:
-          - "8802:6379"
+          - "6379:6379"
       networks:
           - laravel
   composer:

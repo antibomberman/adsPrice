@@ -22,12 +22,8 @@ class BalanceOperationController extends Controller
     public function index(BalanceOperationIndexRequest $request)
     {
         $balanceOperations = BalanceOperation::query()
-            ->join('users','users.id','balance_operations.user_id')
-            ->when($request->has('role_id'),function ($q){
+            ->when($request->has('user_id'),function ($q){
                 return $q->where('user_id',\request('user_id'));
-            })
-            ->when($request->has('search'),function ($q){
-                return $q->where('users.name',"%".\request('search').'%');
             })
             ->with('user')
             ->latest('balance_operations.id')
@@ -37,11 +33,33 @@ class BalanceOperationController extends Controller
     }
     function plus(BalanceOperationPlusRequest $request)
     {
+        $user = User::findOrFail($request->get('user_id'));
+        $user->balance += $request->get('value');
+        $user->save();
 
+        $balanceOperation = BalanceOperation::create([
+            'user_id' => $user->id,
+            'operation' => 'plus',
+            'balance' => $user->balance,
+            'value' => $request->get('value')
+        ]);
+
+        return response()->json($balanceOperation);
     }
     function minus(BalanceOperationMinusRequest $request)
     {
+        $user = User::findOrFail($request->get('user_id'));
+        $user->balance -= $request->get('value');
+        $user->save();
 
+        $balanceOperation = BalanceOperation::create([
+            'user_id' => $user->id,
+            'operation' => "minus",
+            'balance' => $user->balance,
+            'value' => $request->get('value')
+        ]);
+
+        return response()->json($balanceOperation);
     }
 
 }

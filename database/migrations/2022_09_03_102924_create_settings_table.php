@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('balance_phone')->nullable()->comment('телефон номер кассы');
+            $table->text('balance_phone')->nullable()->comment('телефон номер кассы');
             $table->longText('offer')->nullable()->comment('Оферта');
             $table->longText('privacy_policy')->nullable()->comment('Политика конфиденциальности');
             $table->longText('user_agreement')->nullable()->comment('Пользовательское соглашение');

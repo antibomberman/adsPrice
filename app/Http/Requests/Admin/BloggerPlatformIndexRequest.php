@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class BalanceOperationIndexRequest extends FormRequest
+class BloggerPlatformIndexRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,10 @@ class BalanceOperationIndexRequest extends FormRequest
     public function rules()
     {
         return [
-//            'category_id' => 'exists:categories,id',
-//            'search' => '',
-//            'role_id' => 'exists:roles,id',
+            'page' => 'required|integer',
             'user_id' => 'exists:users,id',
+            'platform_id' => 'exists:platforms,id',
+            'status' => ''
         ];
     }
 

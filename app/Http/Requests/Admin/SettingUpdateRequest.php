@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class BalanceOperationIndexRequest extends FormRequest
+class SettingUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,11 @@ class BalanceOperationIndexRequest extends FormRequest
     public function rules()
     {
         return [
-//            'category_id' => 'exists:categories,id',
-//            'search' => '',
-//            'role_id' => 'exists:roles,id',
-            'user_id' => 'exists:users,id',
+            'balance_phone' => '',
+            'offer' => '',
+            'privacy_policy' => '',
+            'user_agreement' => '',
+            'help' => ''
         ];
     }
 

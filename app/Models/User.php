@@ -88,6 +88,9 @@ class User extends Authenticatable  implements Auditable
 
     protected $hidden = [
         'password',
+        'deleted_at',
+        'updated_at',
+
         'remember_token',
     ];
 

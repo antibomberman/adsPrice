@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->comment("заказчик")->constrained('users')->cascadeOnDelete();
             $table->integer('status')->default(1);
+            $table->string('name')->nullable();
             $table->foreignId('category_id')->default(1)->constrained('categories')->cascadeOnDelete();
             $table->integer('count')->default(0)->comment('Сколько view нужно');
             $table->float('price')->default(1)->comment('цена за 1 view');

@@ -27,6 +27,7 @@ class OrderUpdateRequest extends FormRequest
         return [
             'category_id' => 'exists:categories,id',
             'status' => '',
+            'name' => '',
             'count' => '',
             'price' => '',
             'link' => 'url',

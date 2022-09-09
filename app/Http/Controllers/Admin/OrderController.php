@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrderIndexRequest;
+use App\Http\Requests\Admin\OrderStoreRequest;
 use App\Http\Requests\Admin\OrderUpdateRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
@@ -31,6 +32,12 @@ class OrderController extends Controller
     function show(Order $order)
     {
         return response()->json(new OrderResource( $order));
+    }
+    function store(OrderStoreRequest $request)
+    {
+        $order = Order::create($request->validated());
+
+        return response()->json(new OrderResource($order));
     }
     function update(OrderUpdateRequest $request,Order $order)
     {

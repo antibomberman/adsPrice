@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\BloggerOrder;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -16,9 +17,12 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
+            'user' => $this->user,
             'status' => $this->status,
             'category' => $this->category,
             'count' => $this->count,
+            'view_count' => $this->getViewCount(),
             'price' => $this->price,
             'link' => $this->link,
             'video' => $this->video,

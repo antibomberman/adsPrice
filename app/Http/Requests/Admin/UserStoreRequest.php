@@ -25,8 +25,13 @@ class UserStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => '',
-            'name' => ''
+            'phone' => 'required|unique:users',
+            'name' => 'required',
+            'avatar' => 'image',
+            'category_id' => 'required|exists:categories,id',
+            'role_id' => 'required|exists:roles,id',
+            'status' => '',
+            'password' => 'required',
         ];
     }
 

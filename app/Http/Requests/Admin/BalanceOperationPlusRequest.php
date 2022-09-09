@@ -25,6 +25,8 @@ class BalanceOperationPlusRequest extends FormRequest
     public function rules()
     {
         return [
+            'value' => 'required|integer',
+            'user_id' => 'required|exists:users,id'
         ];
     }
 

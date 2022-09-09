@@ -16,6 +16,7 @@ class BloggerPlatformResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user' => $this->user,
             'platform' => $this->platform,
             'status' => $this->status,
             'link' => $this->link,
