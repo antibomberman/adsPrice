@@ -32,6 +32,7 @@ class UserUpdateRequest extends FormRequest
             'category_id' => 'exists:categories,id',
             'role_id' => 'exists:roles,id',
             'status' => '',
+            'description' => '',
         ];
     }
 

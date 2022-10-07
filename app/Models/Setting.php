@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $privacy_policy Политика конфиденциальности
  * @property string|null $user_agreement Пользовательское соглашение
  * @property string|null $help Помощь
+ * @property string|null $about about
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  *
@@ -34,5 +35,5 @@ class Setting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['balance_phone', 'user_agreement', 'offer', 'help', 'privacy_policy'];
+    protected $fillable = ['balance_phone', 'user_agreement', 'offer', 'help', 'privacy_policy','about'];
 }

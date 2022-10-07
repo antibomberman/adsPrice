@@ -62,7 +62,7 @@ class Order extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['user_id', 'status_id', 'category_id', 'count', 'price', 'name', 'link', 'video', 'description'];
+    protected $fillable = ['user_id', 'status', 'category_id', 'count', 'price', 'name', 'link', 'video', 'description'];
 
     protected $hidden = ['updated_at', 'deleted_at'];
 

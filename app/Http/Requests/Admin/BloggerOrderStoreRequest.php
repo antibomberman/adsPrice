@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class SettingUpdateRequest extends FormRequest
+class BloggerOrderStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,11 @@ class SettingUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'balance_phone' => '',
-            'offer' => '',
-            'privacy_policy' => '',
-            'user_agreement' => '',
-            'help' => '',
-            'about' => '',
+            'order_id' => 'required|exists:orders,id',
+            'count' => 'required|integer',
+            'user_id' => 'required|exists:users,id',
+            'token' => 'required|unique:blogger_orders',
+            'url' => 'required'
         ];
     }
 

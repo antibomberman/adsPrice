@@ -28,6 +28,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property int $category_id
  * @property int $status_id
  * @property int $role_id
+ * @property string $description
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -86,6 +87,7 @@ class User extends Authenticatable implements Auditable
         'category_id',
         'role_id',
         'status',
+        'description',
     ];
 
     protected $hidden = [

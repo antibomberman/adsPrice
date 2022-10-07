@@ -55,7 +55,7 @@ services:
         - laravel
 
   redis:
-      image: redis:7.0
+      image: redis:alpine
       container_name: redis
       volumes:
           - ./tmp/redis:/data
@@ -63,6 +63,7 @@ services:
           - "6379:6379"
       networks:
           - laravel
+#      command: redis-server --appendonly yes --replica-read-only
   composer:
       build:
           context: .

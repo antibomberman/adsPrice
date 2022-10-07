@@ -28,6 +28,7 @@ class UserUpdateRequest extends FormRequest
             'phone' => '',
             'name' => '',
             'avatar' => 'image',
+            'description' => '',
             'category_id' => 'exists:categories,id',
         ];
     }
