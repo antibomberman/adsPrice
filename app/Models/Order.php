@@ -26,7 +26,6 @@ use Illuminate\Support\Facades\Storage;
  * @property-read int|null $blogger_orders_count
  * @property-read \App\Models\Category $category
  * @property-read \App\Models\User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Query\Builder|Order onlyTrashed()
@@ -43,26 +42,35 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Query\Builder|Order withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Order withoutTrashed()
  * @mixin \Eloquent
- *
  * @property string|null $video video path
  * @property string|null $description
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideo($value)
- *
  * @property int $status
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereStatus($value)
- *
  * @property \Illuminate\Support\Carbon|null $deleted_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereDeletedAt($value)
+ * @property string|null $name
+ * @property int|null $video_view_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideoViewCount($value)
  */
 class Order extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['user_id', 'status_id', 'category_id', 'count', 'price', 'name', 'link', 'video', 'description'];
+    protected $fillable = [
+        'user_id',
+        'status',
+        'category_id',
+        'count',
+        'price',
+        'name',
+        'link',
+        'video',
+        'description',
+        'video_view_count'
+    ];
 
     protected $hidden = ['updated_at', 'deleted_at'];
 

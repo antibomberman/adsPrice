@@ -32,6 +32,7 @@ class UserStoreRequest extends FormRequest
             'role_id' => 'required|exists:roles,id',
             'status' => '',
             'password' => 'required',
+            'manager_id' => 'exists:users,id'
         ];
     }
 
@@ -41,10 +42,10 @@ class UserStoreRequest extends FormRequest
         ];
     }
 
-    public function failedValidation($validator)
+    public function failedValidation( $validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()], 400)
+            response()->json(['message' => $validator->errors()->first()],400)
         );
     }
 }

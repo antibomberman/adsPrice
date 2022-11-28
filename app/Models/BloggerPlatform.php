@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Platform $platform
  * @property-read \App\Models\Status $status
  * @property-read \App\Models\User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerPlatform newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerPlatform newQuery()
  * @method static \Illuminate\Database\Query\Builder|BloggerPlatform onlyTrashed()
@@ -35,28 +34,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|BloggerPlatform withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BloggerPlatform withoutTrashed()
  * @mixin \Eloquent
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerPlatform whereStatus($value)
- *
  * @property \Illuminate\Support\Carbon|null $deleted_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerPlatform whereDeletedAt($value)
  */
 class BloggerPlatform extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $fillable = ['platform_id','user_id','status','link'];
 
-    protected $fillable = ['platform_id', 'user_id', 'status', 'link'];
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
-    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
-
-    public function platform(): BelongsTo
+    function platform(): BelongsTo
     {
         return  $this->belongsTo(Platform::class);
     }
-
-    public function user(): BelongsTo
+    function user(): BelongsTo
     {
         return  $this->belongsTo(User::class);
     }
+
 }

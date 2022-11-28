@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
             $table->string('token')->unique();
             $table->integer('count')->default(0);
+            $table->integer('video_view_count')->default(0);
             $table->string('url')->nullable();
             $table->timestamps();
             $table->softDeletes();

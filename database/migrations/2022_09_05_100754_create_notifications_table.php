@@ -16,9 +16,14 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('type')->default(1);
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('other_user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->boolean('is_read')->default(0);
+
+            $table->foreignId('from_user_id')->nullable()->constrained('users')->cascadeOnDelete();
+            $table->foreignId('to_user_id')->nullable()->constrained('users')->cascadeOnDelete();
+
             $table->foreignId('order_id')->nullable()->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('task_id')->nullable()->constrained('tasks')->cascadeOnDelete();
+
             $table->string('title');
             $table->text('description');
             $table->timestamps();

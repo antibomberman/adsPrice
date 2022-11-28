@@ -14,9 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $privacy_policy Политика конфиденциальности
  * @property string|null $user_agreement Пользовательское соглашение
  * @property string|null $help Помощь
+ * @property string|null $about about
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
@@ -29,10 +29,11 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUserAgreement($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAbout($value)
  */
 class Setting extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['balance_phone', 'user_agreement', 'offer', 'help', 'privacy_policy'];
+    protected $fillable = ['balance_phone', 'user_agreement', 'offer', 'help', 'privacy_policy','about'];
 }

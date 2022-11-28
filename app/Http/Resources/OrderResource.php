@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\BloggerOrder;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -20,9 +21,16 @@ class OrderResource extends JsonResource
             'user' => $this->user,
             'status' => $this->status,
             'category' => $this->category,
+
             'count' => $this->count,
-            'view_count' => $this->getViewCount(),
+            'video_view_count' => $this->video_view_count,
+            'view_count' => BloggerOrder::join('blogger_order_views', 'blogger_order_views.blogger_order_id', 'blogger_orders.id')
+                ->where('order_id', $this->id)
+                ->where('blogger_orders.user_id',\Auth::id())
+                ->count(),
+
             'price' => $this->price,
+            'blogger_orders' => $this->bloggerOrders()->with('user')->get(),
             'link' => $this->link,
             'video' => $this->video,
             'description' => $this->description,

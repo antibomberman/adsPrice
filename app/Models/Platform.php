@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,6 @@ use Illuminate\Support\Facades\Storage;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Platform newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Platform newQuery()
  * @method static \Illuminate\Database\Query\Builder|Platform onlyTrashed()
@@ -32,6 +32,8 @@ use Illuminate\Support\Facades\Storage;
  * @method static \Illuminate\Database\Query\Builder|Platform withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Platform withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BloggerPlatform[] $bloggerPlatforms
+ * @property-read int|null $blogger_platforms_count
  */
 class Platform extends Model
 {
@@ -47,5 +49,9 @@ class Platform extends Model
             get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
             set: fn ($value) => Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $value),
         );
+    }
+    public function bloggerPlatforms():HasMany
+    {
+        return  $this->hasMany(BloggerPlatform::class);
     }
 }

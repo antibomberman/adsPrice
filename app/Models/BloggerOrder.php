@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Order $order
  * @property-read \App\Models\User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder newQuery()
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder onlyTrashed()
@@ -36,21 +35,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withTrashed()
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withoutTrashed()
  * @mixin \Eloquent
- *
  * @property int $count
  * @property string|null $url
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereUrl($value)
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\BloggerOrderView[] $bloggerOrderView
  * @property-read int|null $blogger_order_view_count
+ * @property int $video_view_count video_view_count
+ * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereVideoViewCount($value)
  */
 class BloggerOrder extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['user_id', 'order_id', 'token', 'url'];
+    protected $fillable = ['user_id', 'order_id', 'token', 'url','count','video_view_count','video_like_count'];
 
     protected $hidden = ['updated_at', 'deleted_at'];
 

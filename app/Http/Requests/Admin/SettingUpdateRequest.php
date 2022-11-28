@@ -30,6 +30,7 @@ class SettingUpdateRequest extends FormRequest
             'privacy_policy' => '',
             'user_agreement' => '',
             'help' => '',
+            'about' => '',
         ];
     }
 

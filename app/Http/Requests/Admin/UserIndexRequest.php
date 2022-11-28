@@ -28,6 +28,7 @@ class UserIndexRequest extends FormRequest
             'category_id' => 'exists:categories,id',
             'search' => '',
             'role_id' => 'exists:roles,id',
+            'manager_id' => 'exists:users,id'
 
         ];
     }
@@ -38,10 +39,10 @@ class UserIndexRequest extends FormRequest
         ];
     }
 
-    public function failedValidation($validator)
+    public function failedValidation( $validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()], 400)
+            response()->json(['message' => $validator->errors()->first()],400)
         );
     }
 }

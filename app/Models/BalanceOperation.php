@@ -17,7 +17,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $user
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BalanceOperation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BalanceOperation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BalanceOperation query()
@@ -34,9 +33,9 @@ class BalanceOperation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'value', 'balance', 'operation'];
+    protected $fillable = ['user_id','value','balance','operation'];
 
-    public function user(): BelongsTo
+    function user():BelongsTo
     {
         return  $this->belongsTo(User::class);
     }

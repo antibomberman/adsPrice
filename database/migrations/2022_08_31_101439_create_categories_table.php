@@ -19,10 +19,11 @@ return new class extends Migration
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
-        });
-        Category::create(['name' => 'все']);
 
-        Schema::table('users', function (Blueprint $table) {
+        });
+       Category::create(['name' => 'все']);
+
+        Schema::table('users',function (Blueprint $table){
             $table->foreignId('category_id')->default(1)->after('balance')->constrained('categories')->cascadeOnDelete();
         });
     }

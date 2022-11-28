@@ -17,7 +17,9 @@ class BloggerOrderResource extends JsonResource
         return [
             'id' => $this->id,
             'order' => new OrderResource($this->order),
+            'user' => $this->user,
             'count' => $this->count,
+            'video_view_count' => $this->video_view_count,
             'url' => $this->url,
             'referral_link' => $this->token,
             'created_at' => $this->created_at,

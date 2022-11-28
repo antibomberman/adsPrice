@@ -28,6 +28,8 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property int $category_id
  * @property int $status_id
  * @property int $role_id
+ * @property int $manager_id
+ * @property string $description
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -45,7 +47,6 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property-read \App\Models\Status $status
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
- *
  * @method static \Database\Factories\UserFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -67,11 +68,10 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @method static \Illuminate\Database\Query\Builder|User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|User withoutTrashed()
  * @mixin \Eloquent
- *
  * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
  * @property-read int|null $audits_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDescription($value)
  */
 class User extends Authenticatable implements Auditable
 {
@@ -86,6 +86,9 @@ class User extends Authenticatable implements Auditable
         'category_id',
         'role_id',
         'status',
+        'description',
+        'is_agree',
+        'manager_id',
     ];
 
     protected $hidden = [
@@ -96,15 +99,7 @@ class User extends Authenticatable implements Auditable
         'remember_token',
     ];
 
-    public function isAdmin(): bool
-    {
-        return $this->role_id == 3;
-    }
 
-    public function isModerator(): bool
-    {
-        return $this->role_id == 4;
-    }
 
     public function isCustomer(): bool
     {
@@ -113,9 +108,22 @@ class User extends Authenticatable implements Auditable
 
     public function isBlogger(): bool
     {
-        return $this->role_id == 1;
+        return $this->role_id == 2;
+    }
+    public function isAdmin(): bool
+    {
+        return $this->role_id == 3;
     }
 
+
+    public function isModerator(): bool
+    {
+        return $this->role_id == 4;
+    }
+    public function isManager(): bool
+    {
+        return $this->role_id == 5;
+    }
     public function category(): BelongsTo
     {
         return  $this->belongsTo(Category::class);
@@ -143,7 +151,7 @@ class User extends Authenticatable implements Auditable
 
     public function notifications(): HasMany
     {
-        return $this->hasMany(Notification::class);
+        return $this->hasMany(Notification::class,'to_user_id');
     }
 
     protected function password(): Attribute
@@ -156,7 +164,7 @@ class User extends Authenticatable implements Auditable
     protected function avatar(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : '',
+            get: fn ($value) => $value ? asset(Storage::disk('public')->url($value)) : 'https://www.onelove.org/wp-content/uploads/2015/10/missingheadshot.jpg',
             set: fn ($value) => Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $value),
         );
     }

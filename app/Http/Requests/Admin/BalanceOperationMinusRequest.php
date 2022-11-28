@@ -26,7 +26,7 @@ class BalanceOperationMinusRequest extends FormRequest
     {
         return [
             'value' => 'required|integer',
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'required|exists:users,id'
         ];
     }
 
@@ -36,10 +36,10 @@ class BalanceOperationMinusRequest extends FormRequest
         ];
     }
 
-    public function failedValidation($validator)
+    public function failedValidation( $validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()], 400)
+            response()->json(['message' => $validator->errors()->first()],400)
         );
     }
 }

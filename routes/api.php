@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BloggerOrderController;
 use App\Http\Controllers\Api\BloggerPlatformController;
@@ -35,24 +37,34 @@ Route::get('referral/{token}', [BloggerOrderController::class, 'referral'])->nam
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('notification', [UserController::class, 'notification']);
     Route::get('profile', [UserController::class, 'profile']);
     Route::post('update', [UserController::class, 'update']);
 
+    Route::prefix('notification')->group(function (){
+        Route::get('/',[NotificationController::class,'index']);
+        Route::post('/',[NotificationController::class,'store']);
+        Route::post('read',[NotificationController::class,'read']);
+        Route::delete('{notification}',[NotificationController::class,'delete']);
+    });
     Route::prefix('order')->group(function () {
         Route::get('/', [OrderController::class, 'index']);
         Route::get('history', [OrderController::class, 'history']);
         Route::get('show/{order}', [OrderController::class, 'show']);
         Route::post('/', [OrderController::class, 'store']);
         Route::post('update/{order}', [OrderController::class, 'update']);
-        Route::delete('/', [OrderController::class, 'delete']);
+        Route::delete('/{order}', [OrderController::class, 'delete']);
+    });
+    Route::prefix('task')->group(function () {
+        Route::get('/', [TaskController::class, 'index'])->withoutMiddleware('auth:sanctum');
+        Route::get('show/{task}', [TaskController::class, 'show'])->withoutMiddleware('auth:sanctum');
+        Route::post('perform', [TaskController::class, 'perform']);
     });
 
     Route::prefix('blogger-platform')->group(function () {
         Route::get('/', [BloggerPlatformController::class, 'index']);
         Route::post('/', [BloggerPlatformController::class, 'store']);
         Route::post('update/{bloggerPlatform}', [BloggerPlatformController::class, 'update']);
-        Route::delete('/', [BloggerPlatformController::class, 'delete']);
+        Route::delete('/{bloggerPlatform}', [BloggerPlatformController::class, 'delete']);
     });
 
     Route::prefix('blogger-order')->group(function () {

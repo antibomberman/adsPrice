@@ -9,26 +9,27 @@ use App\Http\Requests\Api\AuthRegisterVerifyRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(AuthRegisterRequest $request): JsonResponse
+    public function register(AuthRegisterRequest $request) : JsonResponse
     {
+
 //        $code = rand(1000,9999);
         $code = 1111;
-        Cache::tags('register')->put($code, $request->validated(), now()->addMinutes(2));
-
-        return response()->json(['message' => 'вам отправлен код', 'send' => 'sms']);
+        Cache::tags('register')->put($code,$request->validated(),now()->addMinutes(2));
+        return response()->json(['message' => 'вам отправлен код','send' => 'sms']);
     }
 
     public function registerVerify(AuthRegisterVerifyRequest $request): JsonResponse
     {
         $code = $request->get('code');
-        if (! Cache::tags('register')->has($code)) {
-            return  response()->json(['message' => 'Не найден'], 404);
+        if (!Cache::tags('register')->has($code)){
+            return  response()->json(['message' => 'Не найден'],404);
         }
 
         $data = Cache::tags('register')->get($code);
@@ -36,25 +37,26 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
+
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => new UserResource($user),
+            'user' => new UserResource($user)
         ]);
     }
 
-    public function login(AuthLoginRequest $request): JsonResponse
+    public function login(AuthLoginRequest $request):JsonResponse
     {
-        $user = User::where('phone', $request->get('phone'))->firstOrFail();
 
-        if (! Hash::check($request->get('password'), $user->password)) {
+        $user = User::where('phone',$request->get('phone'))->firstOrFail();
+
+        if (!Hash::check($request->get('password'),$user->password)) {
             return response()->json([
-                'message' => 'неверный пароль',
+                'message' => 'неверный пароль'
             ], 400);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -62,10 +64,11 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(): JsonResponse
+    public function logout():JsonResponse
     {
         Auth::user()->tokens()->delete();
 
         return response()->json(['message' => 'вы вышли']);
     }
+
 }

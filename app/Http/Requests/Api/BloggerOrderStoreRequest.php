@@ -26,7 +26,7 @@ class BloggerOrderStoreRequest extends FormRequest
     {
         return [
             'order_id' => 'required|exists:orders,id',
-            'count' => 'required|integer',
+            'count' => 'required|integer'
         ];
     }
 
@@ -36,10 +36,10 @@ class BloggerOrderStoreRequest extends FormRequest
         ];
     }
 
-    public function failedValidation($validator)
+    public function failedValidation( $validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()], 400)
+            response()->json(['message' => $validator->errors()->first()],400)
         );
     }
 }

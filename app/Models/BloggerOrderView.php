@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $agent
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView query()
@@ -25,14 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView whereIp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView whereUpdatedAt($value)
  * @mixin \Eloquent
- *
  * @property int $open_count
- *
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrderView whereOpenCount($value)
  */
 class BloggerOrderView extends Model
 {
     use HasFactory;
+    protected $fillable = ['blogger_order_id','ip','agent'];
 
-    protected $fillable = ['blogger_order_id', 'ip', 'agent'];
 }

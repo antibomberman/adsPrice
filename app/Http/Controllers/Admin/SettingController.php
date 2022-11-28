@@ -19,6 +19,7 @@ class SettingController extends Controller
     {
         $setting = Setting::firstOrFail();
         $setting->update($request->validated());
+        $setting->save();
 
         return response()->json($setting);
     }
