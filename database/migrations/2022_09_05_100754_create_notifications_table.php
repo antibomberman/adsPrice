@@ -24,8 +24,10 @@ return new class extends Migration
             $table->foreignId('order_id')->nullable()->constrained('orders')->cascadeOnDelete();
             $table->foreignId('task_id')->nullable()->constrained('tasks')->cascadeOnDelete();
 
-            $table->string('title');
-            $table->text('description');
+            $table->string('title_ru')->nullable();
+            $table->string('title_kz')->nullable();
+            $table->text('description_ru')->nullable();
+            $table->text('description_kz')->nullable();
             $table->timestamps();
         });
     }

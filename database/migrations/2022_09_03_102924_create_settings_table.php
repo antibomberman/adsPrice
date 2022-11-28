@@ -16,10 +16,23 @@ return new class extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
             $table->text('balance_phone')->nullable()->comment('телефон номер кассы');
-            $table->longText('offer')->nullable()->comment('Оферта');
-            $table->longText('privacy_policy')->nullable()->comment('Политика конфиденциальности');
-            $table->longText('user_agreement')->nullable()->comment('Пользовательское соглашение');
-            $table->longText('help')->nullable()->comment('Помощь');
+
+            $table->longText('offer_ru')->nullable()->comment('Оферта');
+            $table->longText('offer_kz')->nullable()->comment('Оферта');
+
+            $table->longText('privacy_policy_ru')->nullable()->comment('Политика конфиденциальности');
+            $table->longText('privacy_policy_kz')->nullable()->comment('Политика конфиденциальности');
+
+            $table->longText('user_agreement_ru')->nullable()->comment('Пользовательское соглашение');
+            $table->longText('user_agreement_kz')->nullable()->comment('Пользовательское соглашение');
+
+            $table->longText('help_ru')->nullable()->comment('Помощь');
+            $table->longText('help_kz')->nullable()->comment('Помощь');
+
+            $table->longText('about_ru')->nullable();
+            $table->longText('about_kz')->nullable();
+
+
             $table->timestamps();
         });
     }

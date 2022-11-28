@@ -18,7 +18,8 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->foreignId('task_id')->constrained('tasks')->cascadeOnDelete();
             $table->foreignId('blogger_id')->constrained('users')->cascadeOnDelete();
-            $table->text('message')->nullable();
+            $table->text('message_ru')->nullable();
+            $table->text('message_kz')->nullable();
             $table->timestamps();
         });
     }

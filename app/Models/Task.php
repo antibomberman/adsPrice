@@ -35,11 +35,34 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $name_ru
+ * @property string|null $name_kz
+ * @property string|null $description_ru
+ * @property string|null $description_kz
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Query\Builder|Task onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereDescriptionKz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereDescriptionRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereNameKz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereNameRu($value)
+ * @method static \Illuminate\Database\Query\Builder|Task withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Task withoutTrashed()
  */
 class Task extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['user_id','name','description','text_1','text_2','status','price'];
+    protected $fillable = [
+        'user_id',
+        'name_kz',
+        'name_ru',
+        'description_kz',
+        'description_ru',
+        'text_1',
+        'text_2',
+        'status',
+        'price'
+    ];
 
     public function user():BelongsTo
     {

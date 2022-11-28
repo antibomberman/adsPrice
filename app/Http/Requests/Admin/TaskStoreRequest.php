@@ -25,10 +25,12 @@ class TaskStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name_ru' => 'required',
+            'name_kz' => 'required',
             'status' => 'required',
             'price' => 'required|numeric',
-            'description' => 'string',
+            'description_ru' => 'string',
+            'description_kz' => 'string',
             'text_1' => 'string',
             'text_2' => 'string'
         ];

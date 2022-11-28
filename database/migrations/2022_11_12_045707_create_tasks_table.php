@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->tinyInteger('status')->default(1);
-            $table->string('name')->nullable();
-            $table->text('description')->nullable();
+            $table->string('name_ru')->nullable();
+            $table->string('name_kz')->nullable();
+            $table->text('description_ru')->nullable();
+            $table->text('description_kz')->nullable();
+
             $table->float('price')->nullable();
             $table->text('text_1')->nullable();
             $table->text('text_2')->nullable();

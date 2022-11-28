@@ -25,10 +25,12 @@ class TaskUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => '',
+            'name_kz' => 'string',
+            'name_ru' => 'string',
             'status' => '',
             'price' => 'numeric',
-            'description' => 'string',
+            'description_kz' => 'string',
+            'description_ru' => 'string',
             'text_1' => 'string',
             'text_2' => 'string'
         ];

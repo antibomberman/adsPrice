@@ -29,7 +29,6 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property int $status_id
  * @property int $role_id
  * @property int $manager_id
- * @property string $description
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -72,6 +71,13 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @property-read int|null $audits_count
  * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereDescription($value)
+ * @property string|null $description_ru
+ * @property string|null $description_kz
+ * @property int|null $is_agree
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDescriptionKz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDescriptionRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsAgree($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereManagerId($value)
  */
 class User extends Authenticatable implements Auditable
 {
@@ -86,7 +92,8 @@ class User extends Authenticatable implements Auditable
         'category_id',
         'role_id',
         'status',
-        'description',
+        'description_kz',
+        'description_ru',
         'is_agree',
         'manager_id',
     ];

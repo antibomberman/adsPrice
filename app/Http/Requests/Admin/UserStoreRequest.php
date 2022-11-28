@@ -32,6 +32,8 @@ class UserStoreRequest extends FormRequest
             'role_id' => 'required|exists:roles,id',
             'status' => '',
             'password' => 'required',
+            'description_ru' => 'string',
+            'description_kz' => 'string',
             'manager_id' => 'exists:users,id'
         ];
     }

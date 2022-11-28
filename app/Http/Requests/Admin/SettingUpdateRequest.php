@@ -26,11 +26,18 @@ class SettingUpdateRequest extends FormRequest
     {
         return [
             'balance_phone' => '',
-            'offer' => '',
-            'privacy_policy' => '',
-            'user_agreement' => '',
-            'help' => '',
-            'about' => '',
+
+            'offer_kz' => '',
+            'privacy_policy_kz' => '',
+            'user_agreement_kz' => '',
+            'help_kz' => '',
+            'about_kz' => '',
+
+            'offer_ru' => 'string',
+            'privacy_policy_ru' => 'string',
+            'user_agreement_ru' => 'string',
+            'help_ru' => 'string',
+            'about_ru' => 'string',
         ];
     }
 

@@ -28,12 +28,14 @@ class OrderStoreRequest extends FormRequest
             'user_id' => 'required|exists:users,id',
             'category_id' => 'required|exists:categories,id',
             'status' => '',
-            'name' => 'required',
+            'name_ru' => 'required',
+            'name_kz' => 'required',
             'count' => 'required|integer',
             'price' => 'required|numeric',
             'link' => 'required|url',
             'video' => 'file',
-            'description' => '',
+            'description_kz' => 'string',
+            'description_ru' => 'string',
         ];
     }
 

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->float('balance')->default(0);
             $table->integer('status')->default(1);
             $table->boolean('is_agree')->default(0);
+            $table->longText('description_ru')->nullable();
+            $table->longText('description_kz')->nullable();
 
             $table->bigInteger('manager_id')->unsigned()->nullable();
 

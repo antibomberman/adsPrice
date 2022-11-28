@@ -33,7 +33,7 @@ class UserController extends Controller
 
     function category()
     {
-        return response()->json(Category::orderBy('name')->get());
+        return response()->json(Category::orderBy('name_ru')->get());
     }
     function setting()
     {

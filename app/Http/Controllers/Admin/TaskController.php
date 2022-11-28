@@ -30,9 +30,12 @@ class TaskController extends Controller
     {
         $task = new Task();
         $task->user_id = \Auth::id();
-        $task->name = $request->get('name');
+        $task->name_kz = $request->get('name_kz');
+        $task->name_ru = $request->get('name_ru');
+
         $task->status = $request->get('status');
-        $task->description = $request->get('description');
+        $task->description_ru = $request->get('description_ru');
+        $task->description_kz = $request->get('description_kz');
         $task->text_1 = $request->get('text_1');
         $task->text_2 = $request->get('text_2');
         $task->price = $request->get('price');

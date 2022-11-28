@@ -43,6 +43,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $blogger_order_view_count
  * @property int $video_view_count video_view_count
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereVideoViewCount($value)
+ * @property int $video_like_count
+ * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereVideoLikeCount($value)
  */
 class BloggerOrder extends Model
 {

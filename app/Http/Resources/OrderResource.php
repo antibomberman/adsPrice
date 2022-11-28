@@ -17,7 +17,8 @@ class OrderResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
+            'name_ru' => $this->name_ru,
+            'name_kz' => $this->name_kz,
             'user' => $this->user,
             'status' => $this->status,
             'category' => $this->category,
@@ -33,7 +34,8 @@ class OrderResource extends JsonResource
             'blogger_orders' => $this->bloggerOrders()->with('user')->get(),
             'link' => $this->link,
             'video' => $this->video,
-            'description' => $this->description,
+            'description_ru' => $this->description_ru,
+            'description_kz' => $this->description_kz,
             'created_at' => $this->created_at,
         ];
     }

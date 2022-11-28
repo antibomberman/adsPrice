@@ -26,13 +26,14 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'phone' => '',
-            'name' => '',
+            'name' => 'string',
             'password' => '',
             'avatar' => 'image',
             'category_id' => 'exists:categories,id',
             'role_id' => 'exists:roles,id',
             'status' => '',
-            'description' => '',
+            'description_kz' => 'string',
+            'description_ru' => 'string',
             'is_agree' => '',
             'manager_id' => 'exists:users,id'
         ];

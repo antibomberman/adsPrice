@@ -14,7 +14,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int $status
  * @property int $task_id
  * @property int $blogger_id
- * @property string|null $message
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\User $blogger
@@ -25,17 +24,31 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereBloggerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereMessage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereTaskId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $message_ru
+ * @property string|null $message_kz
+ * @property string|null $link
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\TaskBloggerImage[] $images
+ * @property-read int|null $images_count
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereMessageKz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TaskBlogger whereMessageRu($value)
  */
 class TaskBlogger extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['blogger_id','task_id','status','message','link'];
+    protected $fillable = [
+        'blogger_id',
+        'task_id',
+        'status',
+        'message_kz',
+        'message_ru',
+        'link'
+    ];
 
     public function task():BelongsTo
     {

@@ -25,7 +25,8 @@ class CategoryUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ''
+            'name_kz' => 'string',
+            'name_ru' => 'string'
         ];
     }
 
