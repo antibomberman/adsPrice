@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BloggerPlatformController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PlatformController;
+use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\TaskBloggerController;
