@@ -7,9 +7,9 @@ use App\Http\Controllers\Admin\BloggerPlatformController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PlatformController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\TaskBloggerController;
 use App\Http\Controllers\Admin\TaskController;
 use App\Http\Controllers\Admin\UserController;
@@ -50,6 +50,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('update/{platform}', [PlatformController::class, 'update']);
         Route::delete('/{platform}', [PlatformController::class, 'delete']);
     });
+    Route::prefix('post')->group(function () {
+        Route::get('/', [PostController::class, 'index']);
+        Route::post('/', [PostController::class, 'store']);
+        Route::post('update/{post}', [PostController::class, 'update']);
+        Route::post('upload-image', [PostController::class, 'uploadImage']);
+        Route::delete('/{post}', [PostController::class, 'delete']);
+    });
+
     Route::prefix('order')->group(function () {
         Route::get('/', [OrderController::class, 'index']);
         Route::get('show/{order}', [OrderController::class, 'show']);

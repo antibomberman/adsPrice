@@ -31,7 +31,7 @@ class OrderResource extends JsonResource
                 ->count(),
 
             'price' => $this->price,
-            'blogger_orders' => $this->bloggerOrders()->with('user')->get(),
+            'blogger_orders' => BloggerOrderResource::collection($this->bloggerOrders()->with('user')->get()),
             'link' => $this->link,
             'video' => $this->video,
             'description_ru' => $this->description_ru,

@@ -29,8 +29,10 @@ class NotificationResource extends JsonResource
 
             'order' => $this->order,
             'task' => $this->task,
-            'title' => $this->title,
-            'description' => $this->description,
+            'title_ru' => $this->title_ru,
+            'title_kz' => $this->title_kz,
+            'description_ru' => $this->description_ru,
+            'description_kz' => $this->description_kz,
         ];
     }
 }

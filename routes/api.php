@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BloggerOrderController;
 use App\Http\Controllers\Api\BloggerPlatformController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\PlatformController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ Route::get('category', [UserController::class, 'category']);
 Route::get('setting', [UserController::class, 'setting']);
 Route::get('platform', [PlatformController::class, 'index']);
 Route::get('referral/{token}', [BloggerOrderController::class, 'referral'])->name('referral');
+
+Route::prefix('post')->group(function () {
+    Route::get('/', [PostController::class, 'index']);
+    Route::get('show/{post}', [PostController::class, 'show']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
