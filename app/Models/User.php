@@ -145,6 +145,10 @@ class User extends Authenticatable implements Auditable
     {
         return  $this->hasMany(Order::class);
     }
+    public function posts(): HasMany
+    {
+        return  $this->hasMany(Post::class);
+    }
 
     public function bloggerOrders(): HasMany
     {

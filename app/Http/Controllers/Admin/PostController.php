@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PlatformStoreRequest;
 use App\Http\Requests\Admin\PlatformUpdateRequest;
 use App\Http\Requests\Admin\PostStoreRequest;
+use App\Http\Requests\Admin\PostUploadImageRequest;
 use App\Http\Requests\Api\OrderHistoryRequest;
 use App\Http\Requests\Api\OrderIndexRequest;
 use App\Http\Requests\Api\OrderStoreRequest;
@@ -33,9 +34,9 @@ class PostController extends Controller
     }
     function store(PostStoreRequest $request)
     {
-        $platform = Platform::create($request->validated());
+        $post = Auth::user()->posts()->create($request->validated());
 
-        return response()->json($platform);
+        return response()->json($post);
     }
     function update(PostStoreRequest $request,Post $post)
     {
@@ -49,7 +50,7 @@ class PostController extends Controller
 
         return response()->json(['message' => 'delete']);
     }
-    public function uploadImage(Request $request)
+    public function uploadImage(PostUploadImageRequest $request)
     {
         $fileName = Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $request->file('image'));
 
