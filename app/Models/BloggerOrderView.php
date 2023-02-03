@@ -30,6 +30,6 @@ use Illuminate\Database\Eloquent\Model;
 class BloggerOrderView extends Model
 {
     use HasFactory;
-    protected $fillable = ['blogger_order_id','ip','agent'];
+    protected $fillable = ['blogger_order_id','ip','agent','open_count'];
 
 }

@@ -45,6 +45,10 @@ class UserController extends Controller
     }
     public function update(UserUpdateRequest $request,User $user)
     {
+        $uniquePhone = User::where('phone', $request['phone'])->where('id', '!=', $user['id'])->first();
+        if ($uniquePhone) {
+            return response()->json(['message' => 'Данный номер телефона занят'],400);
+        }
         $user->update($request->validated());
 
         return response()->json(new UserResource($user));

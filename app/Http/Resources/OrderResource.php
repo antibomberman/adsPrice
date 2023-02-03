@@ -34,6 +34,7 @@ class OrderResource extends JsonResource
             'blogger_orders' => BloggerOrderResource::collection($this->bloggerOrders()->with('user')->get()),
             'link' => $this->link,
             'video' => $this->video,
+            'video_link' => $this->video_link,
             'description_ru' => $this->description_ru,
             'description_kz' => $this->description_kz,
             'created_at' => $this->created_at,

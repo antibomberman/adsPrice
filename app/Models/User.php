@@ -96,6 +96,7 @@ class User extends Authenticatable implements Auditable
         'description_ru',
         'is_agree',
         'manager_id',
+        'show_tasks',
     ];
 
     protected $hidden = [

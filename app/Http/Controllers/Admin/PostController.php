@@ -52,7 +52,7 @@ class PostController extends Controller
     }
     public function uploadImage(PostUploadImageRequest $request)
     {
-        $fileName = Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $request->file('image'));
+        $fileName = Storage::disk('public')->putFile('images/'.Carbon::now()->format('Y/m'), $request->file('upload'));
 
         return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => Storage::disk('public')->url($fileName)]);
     }

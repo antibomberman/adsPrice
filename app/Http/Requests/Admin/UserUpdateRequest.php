@@ -35,7 +35,8 @@ class UserUpdateRequest extends FormRequest
             'description_kz' => 'string',
             'description_ru' => 'string',
             'is_agree' => '',
-            'manager_id' => 'exists:users,id'
+            'manager_id' => '',
+            'show_tasks' => 'in:1,0'
         ];
     }
 

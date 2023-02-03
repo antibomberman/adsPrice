@@ -26,6 +26,7 @@ return new class extends Migration
             $table->longText('description_kz')->nullable();
 
             $table->bigInteger('manager_id')->unsigned()->nullable();
+            $table->boolean('show_tasks')->default(0);
 
             $table->enum('lang',['ru','kz'])->default('ru');
             $table->rememberToken();

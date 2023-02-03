@@ -27,12 +27,15 @@ class OrderUpdateRequest extends FormRequest
         return [
             'category_id' => 'exists:categories,id',
             'status' => '',
-            'name' => '',
+            'name_ru' => '',
+            'name_kz' => '',
             'count' => '',
             'price' => '',
             'link' => 'url',
             'video' => '',
-            'description' => '',
+            'video_link' => '',
+            'description_ru' => '',
+            'description_kz' => '',
         ];
     }
 

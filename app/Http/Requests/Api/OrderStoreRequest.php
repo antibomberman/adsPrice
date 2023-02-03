@@ -32,6 +32,7 @@ class OrderStoreRequest extends FormRequest
             'price' => 'integer',
             'link' => 'required|url',
             'video' => 'file',
+            'video_link' => 'string',
             'description_ru' => 'string',
             'description_kz' => 'string',
         ];

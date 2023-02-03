@@ -12,10 +12,14 @@ use App\Http\Controllers\Admin\StatisticController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TaskBloggerController;
 use App\Http\Controllers\Admin\TaskController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
+Route::prefix('post')->group(function () {
+    Route::post('upload-image', [PostController::class, 'uploadImage']);
+});
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('statistic', [StatisticController::class, 'index']);
@@ -37,6 +41,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{task}', [TaskController::class, 'delete']);
     });
 
+    Route::prefix('notification')->group(function () {
+        Route::get('/', [NotificationController::class, 'index']);
+        Route::get('show/{notification}', [NotificationController::class, 'show']);
+        Route::post('/', [NotificationController::class, 'store']);
+        Route::post('update/{notification}', [NotificationController::class, 'update']);
+        Route::delete('/{notification}', [NotificationController::class, 'delete']);
+    });
+
     Route::prefix('task-blogger')->group(function () {
         Route::get('/', [TaskBloggerController::class, 'index']);
         Route::post('update/{taskBlogger}', [TaskBloggerController::class, 'update']);
@@ -54,7 +66,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/', [PostController::class, 'index']);
         Route::post('/', [PostController::class, 'store']);
         Route::post('update/{post}', [PostController::class, 'update']);
-        Route::post('upload-image', [PostController::class, 'uploadImage']);
+//         Route::post('upload-image', [PostController::class, 'uploadImage']);
         Route::delete('/{post}', [PostController::class, 'delete']);
     });
 

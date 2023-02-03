@@ -29,6 +29,7 @@ class BloggerOrderUpdateRequest extends FormRequest
             'count' => 'integer',
             'order_id' => 'exists:orders,id',
             'user_id' => 'exists:users,id',
+            'status' => '',
         ];
     }
 

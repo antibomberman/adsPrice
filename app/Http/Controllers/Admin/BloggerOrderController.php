@@ -25,11 +25,11 @@ class BloggerOrderController extends Controller
             ->when($request->has('search'), function (QueryBuilder $q) {
                 return $q->where('users.name','LIKE','%'.request('search').'%');
             })
-            ->with('order', 'user')
+            ->with('order', 'user', 'bloggerOrderView')
             ->whereHas('order')
             ->select('blogger_orders.*')
             ->get();
-
+        return $bloggerOrders;
         return response()->json(BloggerOrderResource::collection($bloggerOrders));
     }
 

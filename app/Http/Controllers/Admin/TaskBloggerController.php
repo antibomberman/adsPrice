@@ -26,7 +26,7 @@ class TaskBloggerController extends Controller
             ->when($request->has('status'),function ($q){
                     return $q->where('status',\request('status'));
             })
-            ->with(['blogger','task'])
+            ->with(['blogger','task', 'images'])
             ->get();
 
 

@@ -29,7 +29,8 @@ class BloggerOrderStoreRequest extends FormRequest
             'count' => 'required|integer',
             'user_id' => 'required|exists:users,id',
             'token' => 'required|unique:blogger_orders',
-            'url' => 'required'
+            'url' => 'required',
+            'status' => '',
         ];
     }
 

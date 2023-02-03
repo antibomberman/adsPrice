@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'status' => $this->status,
             'role' => $this->role,
             'is_agree' => $this->is_agree,
+            'show_tasks' => $this->show_tasks,
             'manager' => User::find($this->manager_id),
 
         ];

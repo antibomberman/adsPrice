@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Query\Builder|BloggerOrder withoutTrashed()
  * @mixin \Eloquent
  * @property int $count
+ * @property int $status
  * @property string|null $url
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|BloggerOrder whereUrl($value)
@@ -50,7 +51,7 @@ class BloggerOrder extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['user_id', 'order_id', 'token', 'url','count','video_view_count','video_like_count'];
+    protected $fillable = ['user_id', 'order_id', 'token', 'url','count','video_view_count','video_like_count','status'];
 
     protected $hidden = ['updated_at', 'deleted_at'];
 

@@ -54,6 +54,7 @@ use Illuminate\Support\Facades\Storage;
  * @property int|null $video_view_count
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Order whereVideoViewCount($value)
+ * @property string|null $video_link
  * @property string|null $name_ru
  * @property string|null $name_kz
  * @property string|null $description_ru
@@ -77,6 +78,7 @@ class Order extends Model
         'name_ru',
         'link',
         'video',
+        'video_link',
         'description_kz',
         'description_ru',
         'video_view_count'

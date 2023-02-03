@@ -31,18 +31,18 @@ class AuthController extends Controller
                 'message' => 'неверный пароль'
             ], 400);
         }
-        if ($user->isAdmin() or $user->isModerator()){
+//         if ($user->isAdmin() or $user->isModerator() or $user->isManager()){
             $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
                 'user' => new UserResource($user),
             ]);
-        }else{
-            return response()->json([
-                'message' => 'нет доступа'
-            ], 400);
-        }
+//         }else{
+//             return response()->json([
+//                 'message' => 'нет доступа'
+//             ], 400);
+//         }
 
 
     }

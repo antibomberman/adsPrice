@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('profile', [UserController::class, 'profile']);
     Route::post('update', [UserController::class, 'update']);
+    Route::post('edit-password', [UserController::class, 'editPassword']);
 
     Route::prefix('notification')->group(function (){
         Route::get('/',[NotificationController::class,'index']);
