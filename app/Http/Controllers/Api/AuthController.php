@@ -21,9 +21,9 @@ class AuthController extends Controller
     {
 
 //         if (in_array($request->get('phone'),['7004448696'])){
-            $code = 1111;
+//             $code = 1111;
 //         }else{
-//             $code = rand(1000,9999);
+            $code = rand(1000,9999);
             Sms::send($request->get('phone'),"код подтверждения : $code");
 //         }
 

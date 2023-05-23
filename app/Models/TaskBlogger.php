@@ -47,7 +47,8 @@ class TaskBlogger extends Model
         'status',
         'message_kz',
         'message_ru',
-        'link'
+        'link',
+        'paid'
     ];
 
     public function task():BelongsTo

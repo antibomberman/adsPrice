@@ -43,14 +43,18 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('notification')->group(function () {
         Route::get('/', [NotificationController::class, 'index']);
+        Route::get('/for-me', [NotificationController::class, 'forMe']);
         Route::get('show/{notification}', [NotificationController::class, 'show']);
         Route::post('/', [NotificationController::class, 'store']);
         Route::post('update/{notification}', [NotificationController::class, 'update']);
         Route::delete('/{notification}', [NotificationController::class, 'delete']);
+        Route::post('/deleteAll', [NotificationController::class, 'deleteAll']);
+        Route::post('read',[NotificationController::class,'read']);
     });
 
     Route::prefix('task-blogger')->group(function () {
         Route::get('/', [TaskBloggerController::class, 'index']);
+        Route::get('/completed', [TaskBloggerController::class, 'completed']);
         Route::post('update/{taskBlogger}', [TaskBloggerController::class, 'update']);
         Route::delete('/{taskBlogger}', [TaskBloggerController::class, 'delete']);
     });
@@ -79,6 +83,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     Route::prefix('blogger-order')->group(function () {
         Route::get('/', [BloggerOrderController::class, 'index']);
+        Route::get('/completed', [BloggerOrderController::class, 'completed']);
         Route::get('show/{bloggerOrder}', [BloggerOrderController::class, 'show']);
         Route::post('/', [BloggerOrderController::class, 'store']);
         Route::post('update/{bloggerOrder}', [BloggerOrderController::class, 'update']);

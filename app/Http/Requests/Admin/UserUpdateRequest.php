@@ -36,7 +36,8 @@ class UserUpdateRequest extends FormRequest
             'description_ru' => 'string',
             'is_agree' => '',
             'manager_id' => '',
-            'show_tasks' => 'in:1,0'
+            'show_tasks' => 'in:1,0',
+            'iban' => '',
         ];
     }
 

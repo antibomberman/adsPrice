@@ -21,6 +21,8 @@ class YoutubeGetCountCommand extends Command
             if (!isset($parts['query'])) continue;
             $id = null;
             parse_str($parts['query'], $id);
+            if (!$id) continue;
+            if (!isset($id['v'])) continue;
             $response = Http::get('https://www.googleapis.com/youtube/v3/videos',[
                 'part' => 'statistics',
                 'id' => $id['v'],

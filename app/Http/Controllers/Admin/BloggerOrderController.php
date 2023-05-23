@@ -16,18 +16,24 @@ class BloggerOrderController extends Controller
     {
         $bloggerOrders = BloggerOrder::query()
             ->join('users','users.id','blogger_orders.user_id')
+            ->where('blogger_orders.status', '<=', 3)
             ->when($request->has('order_id'), function ($q) {
                 return $q->where('order_id', \request('order_id'));
             })
             ->when($request->has('user_id'), function ($q) {
                 return $q->where('user_id', \request('user_id'));
             })
+            ->when($request->has('status'), function ($q) {
+                return $q->where('blogger_orders.status', \request('status'));
+            })
             ->when($request->has('search'), function (QueryBuilder $q) {
                 return $q->where('users.name','LIKE','%'.request('search').'%');
             })
             ->with('order', 'user', 'bloggerOrderView')
             ->whereHas('order')
+            ->whereHas('user')
             ->select('blogger_orders.*')
+            ->orderBy('blogger_orders.status')
             ->get();
         return $bloggerOrders;
         return response()->json(BloggerOrderResource::collection($bloggerOrders));
@@ -57,5 +63,27 @@ class BloggerOrderController extends Controller
         $bloggerOrder->delete();
 
         return response()->json(['message' => 'Удалено']);
+    }
+
+    public function completed(BloggerOrderIndexRequest $request)
+    {
+        $bloggerOrders = BloggerOrder::where('blogger_orders.status', 5)
+            ->join('users','users.id','blogger_orders.user_id')
+            ->when($request->has('order_id'), function ($q) {
+                return $q->where('order_id', \request('order_id'));
+            })
+            ->when($request->has('user_id'), function ($q) {
+                return $q->where('user_id', \request('user_id'));
+            })
+            ->when($request->has('search'), function (QueryBuilder $q) {
+                return $q->where('users.name','LIKE','%'.request('search').'%');
+            })
+            ->with('order', 'user', 'bloggerOrderView')
+            ->whereHas('order')
+            ->whereHas('user')
+            ->select('blogger_orders.*')
+            ->get();
+        return $bloggerOrders;
+        return response()->json(BloggerOrderResource::collection($bloggerOrders));
     }
 }

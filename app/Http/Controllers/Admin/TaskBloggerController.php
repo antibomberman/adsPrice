@@ -44,5 +44,17 @@ class TaskBloggerController extends Controller
 
         return response()->json(['message' => 'deleted']);
     }
+    function completed(Request $request)
+    {
+        $lastItem = Task::get()->last();
+        $tasks = TaskBlogger::where('task_id', $lastItem->id)
+            ->join('users', 'users.id', 'task_bloggers.blogger_id')
+            ->where('task_bloggers.status', 2)
+            ->select('users.*', 'task_bloggers.paid', 'task_bloggers.id as task_blogger_id')
+            ->get();
+
+
+        return response()->json($tasks);
+    }
 
 }

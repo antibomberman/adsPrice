@@ -32,7 +32,8 @@ class UserUpdateRequest extends FormRequest
             'is_agree' => '',
             'category_id' => 'exists:categories,id',
             'manager_id' => 'exists:users,id',
-            'show_tasks' => 'in:1,0'
+            'show_tasks' => 'in:1,0',
+            'iban' => '',
         ];
     }
 

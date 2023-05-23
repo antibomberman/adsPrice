@@ -30,6 +30,7 @@ class BloggerOrderUpdateRequest extends FormRequest
             'order_id' => 'exists:orders,id',
             'user_id' => 'exists:users,id',
             'status' => '',
+            'paid' => '',
         ];
     }
 

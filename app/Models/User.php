@@ -97,6 +97,7 @@ class User extends Authenticatable implements Auditable
         'is_agree',
         'manager_id',
         'show_tasks',
+        'iban'
     ];
 
     protected $hidden = [

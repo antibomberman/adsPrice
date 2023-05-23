@@ -25,6 +25,7 @@ class UserController extends Controller
     {
         return response()->json(new UserResource(Auth::user()));
     }
+
     public function update(UserUpdateRequest $request)
     {
         Auth::user()->update($request->validated());
@@ -36,24 +37,20 @@ class UserController extends Controller
     {
         return response()->json(Category::orderBy('name_ru')->get());
     }
+
     function setting()
     {
         return response()->json(Setting::firstOrFail());
     }
+
     function editPassword(EditPasswordRequest $request)
     {
-        $user = auth()->user()->makeVisible(['password']);
-//         dd(Hash::make($request['new_password']), $user->password, $request['old_password']);
-        if (!Hash::check($request->get('old_password'), $user->password)) {
+        if (!Hash::check($request->get('password'), Auth::user()->password)) {
             return response()->json([
                 'message' => 'неверный пароль'
             ], 400);
         }
-
-        $user['password'] = Hash::make($request['new_password']);
-
-        $user->save();
-
+        Auth::user()->update(['password' => $request->get('new_password')]);
 
         return response()->json(['message' => 'Успешно']);
     }

@@ -29,6 +29,8 @@ class UserResource extends JsonResource
             'is_agree' => $this->is_agree,
             'show_tasks' => $this->show_tasks,
             'manager' => User::find($this->manager_id),
+            'iban' => $this->iban,
+            'created_at' => $this->created_at,
 
         ];
     }

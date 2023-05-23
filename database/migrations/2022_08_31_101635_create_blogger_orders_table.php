@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('count')->default(0);
             $table->integer('video_view_count')->default(0);
             $table->string('url')->nullable();
+            $table->integer('status')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -28,6 +28,7 @@ class BloggerPlatformController extends Controller
             ->when($request->has('status'),function ($q){
                 return $q->where('status',\request('status'));
             })
+            ->whereHas('user')
             ->latest()
             ->get();
         return response()->json(BloggerPlatformResource::collection($bloggerPlatforms));

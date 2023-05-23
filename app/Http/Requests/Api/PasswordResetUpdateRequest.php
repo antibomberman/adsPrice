@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class TaskBloggerUpdateRequest extends FormRequest
+class PasswordResetUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class TaskBloggerUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'string',
-            'status' => '',
-            'blogger_id' => 'exists:users,id',
-            'task_id' => 'exists:tasks,id',
-            'paid' => '',
+            'password_reset_token' => ['required','string'],
+            'password' => ['required', 'confirmed','string','min:3','max:255'],
         ];
     }
 
@@ -39,10 +36,10 @@ class TaskBloggerUpdateRequest extends FormRequest
         ];
     }
 
-    public function failedValidation( $validator)
+    public function failedValidation($validator)
     {
         throw new HttpResponseException(
-            response()->json(['message' => $validator->errors()->first()],400)
+            response()->json(['message' => $validator->errors()->first()], 400)
         );
     }
 }

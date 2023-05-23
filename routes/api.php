@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\NotificationController;
+use App\Http\Controllers\Api\PasswordResetController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BloggerOrderController;
@@ -40,7 +41,11 @@ Route::prefix('post')->group(function () {
     Route::get('/', [PostController::class, 'index']);
     Route::get('show/{post}', [PostController::class, 'show']);
 });
-
+Route::prefix('password-reset')->group(function () {
+    Route::post('init', [PasswordResetController::class, 'init']);
+    Route::post('verify', [PasswordResetController::class, 'verify']);
+    Route::post('update', [PasswordResetController::class, 'update']);
+});
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('profile', [UserController::class, 'profile']);
@@ -50,6 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('notification')->group(function (){
         Route::get('/',[NotificationController::class,'index']);
         Route::post('/',[NotificationController::class,'store']);
+        Route::post('/to-moderators',[NotificationController::class,'toModerators']);
         Route::post('read',[NotificationController::class,'read']);
         Route::delete('{notification}',[NotificationController::class,'delete']);
     });

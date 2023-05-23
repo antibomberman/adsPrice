@@ -27,6 +27,7 @@ class BloggerOrderUpdateRequest extends FormRequest
         return [
             'url' => 'url',
             'count' => 'integer',
+            'status' => '',
         ];
     }
 

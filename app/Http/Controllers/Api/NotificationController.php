@@ -44,6 +44,16 @@ class NotificationController extends Controller
 
         return response()->json(['message' => 'send']);
     }
+    function toModerators(NotificationStoreRequest $request)
+    {
+        $users = User::where('role_id', '>=', 3)->cursor();
+
+        foreach ($users as $user) {
+            $user->notifications()->create($request->validated());
+        }
+
+        return response()->json(['message' => 'send']);
+    }
 
     function read()
     {

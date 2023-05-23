@@ -51,7 +51,7 @@ class BloggerOrder extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['user_id', 'order_id', 'token', 'url','count','video_view_count','video_like_count','status'];
+    protected $fillable = ['user_id', 'order_id', 'token', 'url','count','video_view_count','video_like_count','status','paid'];
 
     protected $hidden = ['updated_at', 'deleted_at'];
 

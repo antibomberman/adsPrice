@@ -56,7 +56,8 @@ class Setting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'balance_phone',
+        'balance_phone_kz',
+        'balance_phone_ru',
         'user_agreement_kz',
         'user_agreement_ru',
         'offer_kz',

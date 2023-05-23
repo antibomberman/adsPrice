@@ -36,6 +36,7 @@ class AuthRegisterRequest extends FormRequest
     public function messages()
     {
         return [
+            'phone.unique' => 'Данный номер телефона занят'
         ];
     }
 

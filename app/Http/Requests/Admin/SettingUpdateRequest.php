@@ -25,7 +25,8 @@ class SettingUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'balance_phone' => '',
+            'balance_phone_kz' => '',
+            'balance_phone_ru' => '',
 
             'offer_kz' => '',
             'privacy_policy_kz' => '',
